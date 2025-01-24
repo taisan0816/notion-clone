@@ -2,8 +2,15 @@ import { Box, Drawer, IconButton, List, ListItemButton, Typography } from '@mui/
 import React from 'react'
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined"
 import AddBoxOutlinedIcon from "@mui/icons-material/LogoutOutlined"
+import assets from "../../assets/index"
+import { useNavigate } from 'react-router-dom'
 
 function Sidebar() {
+    const navigate = useNavigate()
+    const logout = () => {
+        localStorage.removeItem("token")
+        navigate("/login")
+    }
   return (
     <Drawer 
         container={window.document.body}
@@ -11,7 +18,7 @@ function Sidebar() {
         open={true}
         sx={{width: 250, height:"100vh"}}
     >
-        <List sx={{width: 250, height: "100vh"}}>
+        <List sx={{width: 250, height: "100vh", backgroundColor: assets.colors.secondary}}>
             <ListItemButton>
                 <Box sx={{
                     width: "100%", 
@@ -23,8 +30,25 @@ function Sidebar() {
                     <Typography variant='body2' fontWeight="700">
                         shincode
                     </Typography>
-                    <IconButton>
+                    <IconButton onClick={logout}>
                         <LogoutOutlinedIcon />
+                    </IconButton>
+                </Box>
+            </ListItemButton>
+            <Box sx={{paddingTop: "10px"}}></Box>
+            <ListItemButton>
+                <Box sx={{
+                    width: "100%", 
+                    display:"flex",
+                    alignItems: "center", 
+                    justifyContent: "space-between"
+                    }}
+                >
+                    <Typography variant='body2' fontWeight="700">
+                        お気に入り
+                    </Typography>
+                    <IconButton>
+                        <AddBoxOutlinedIcon fontSize='small'/>
                     </IconButton>
                 </Box>
             </ListItemButton>
@@ -41,23 +65,7 @@ function Sidebar() {
                         プライベート
                     </Typography>
                     <IconButton>
-                        <AddBoxOutlinedIcon />
-                    </IconButton>
-                </Box>
-            </ListItemButton>
-            <ListItemButton>
-                <Box sx={{
-                    width: "100%", 
-                    display:"flex",
-                    alignItems: "center", 
-                    justifyContent: "space-between"
-                    }}
-                >
-                    <Typography variant='body2' fontWeight="700">
-                        shincode
-                    </Typography>
-                    <IconButton>
-                        <LogoutOutlinedIcon />
+                        <AddBoxOutlinedIcon fontSize='small'/>
                     </IconButton>
                 </Box>
             </ListItemButton>
